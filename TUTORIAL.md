@@ -1,143 +1,161 @@
-# Kaguneimgui UI Library Tutorial
+# KaguneImGui Lua Tutorial
 
-## Introduction
-This tutorial provides comprehensive instructions on how to use the Kaguneimgui UI library. You will find explanations in both English and Russian, detailed examples, and descriptions for each widget and feature.
+## English
 
----
-
-## Table of Contents
-1. [Installation](#installation)
-2. [Basic Widgets](#basic-widgets)
-    - [Button](#button)
-    - [Label](#label)
-    - [Input Field](#input-field)
-3. [Layouts](#layouts)
-    - [Vertical Layout](#vertical-layout)
-    - [Horizontal Layout](#horizontal-layout)
-4. [Advanced Features](#advanced-features)
-    - [Drag and Drop](#drag-and-drop)
-    - [Animations](#animations)
-5. [Examples](#examples)
-
----
-
-## Installation
-### English
-To install the Kaguneimgui UI library, you can download the latest release from GitHub or install via package managers.
-
-### Русский
-Чтобы установить библиотеку UI Kaguneimgui, вы можете скачать последнюю версию из GitHub или установить через менеджеры пакетов.
-
----
-
-## Basic Widgets
 ### Button
-#### English
-A button is a widget that performs an action when clicked. Here’s how you can create a button:
-```cpp
-if (ImGui::Button("Click Me!")) {
-    // perform action
-}
-```
-#### Русский
-Кнопка — это виджет, который выполняет действие при нажатии. Вот как вы можете создать кнопку:
-```cpp
-if (ImGui::Button("Нажми меня!")) {
-    // выполнить действие
-}
+```lua
+function createButton()
+    if imgui.Button("Click Me!") then
+        print("Button Clicked!")
+    end
+end
 ```
 
 ### Label
-#### English
-A label displays text on the screen. Example:
-```cpp
-ImGui::Text("Hello, World!");
-```
-#### Русский
-Метка отображает текст на экране. Пример:
-```cpp
-ImGui::Text("Привет, Мир!");
+```lua
+function createLabel()
+    imgui.Text("Hello, this is a label!")
+end
 ```
 
-### Input Field
-#### English
-An input field allows users to enter text:
-```cpp
-char buffer[128];
-ImGui::InputText("Input", buffer, sizeof(buffer));
-```
-#### Русский
-Поле ввода позволяет пользователям вводить текст:
-```cpp
-char buffer[128];
-ImGui::InputText("Ввод", buffer, sizeof(buffer));
+### Input
+```lua
+local inputText = ""
+function createInput()
+    imgui.InputText("Input Text", inputText, 256)
+end
 ```
 
-## Layouts
-### Vertical Layout
-#### English
-Create a vertical layout using the following code:
-```cpp
-ImGui::BeginVertical();
-// add widgets
-ImGui::EndVertical();
-```
-#### Русский
-Создайте вертикальный макет, используя следующий код:
-```cpp
-ImGui::BeginVertical();
-// добавить виджеты
-ImGui::EndVertical();
+### Checkbox
+```lua
+local checkboxState = false
+function createCheckbox()
+    imgui.Checkbox("Check Me", checkboxState)
+end
 ```
 
-### Horizontal Layout
-#### English
-Create a horizontal layout with:
-```cpp
-ImGui::BeginHorizontal();
-// add widgets
-ImGui::EndHorizontal();
-```
-#### Русский
-Создайте горизонтальный макет с:
-```cpp
-ImGui::BeginHorizontal();
-// добавить виджеты
-ImGui::EndHorizontal();
+### Slider
+```lua
+local sliderValue = 50
+function createSlider()
+    imgui.SliderInt("Slider", sliderValue, 0, 100)
+end
 ```
 
-## Advanced Features
-### Drag and Drop
-#### English
-Implement drag and drop functionality:
-```cpp
-// implement drag and drop
-```
-#### Русский
-Реализуйте функциональность перетаскивания и сброса:
-```cpp
-// реализовать перетаскивание и сброс
+### FloatSlider
+```lua
+local floatValue = 0.5
+function createFloatSlider()
+    imgui.SliderFloat("Float Slider", floatValue, 0.0, 1.0)
+end
 ```
 
-### Animations
-#### English
-To add animations, use:
-```cpp
-// animation code
-```
-#### Русский
-Чтобы добавить анимации, используйте:
-```cpp
-// код анимации
+### RadioButton
+```lua
+local selected = 1
+function createRadioButtons()
+    imgui.RadioButton("Option 1", selected == 1)
+    imgui.RadioButton("Option 2", selected == 2)
+end
 ```
 
-## Examples
-### English
-Here are some complete examples demonstrating the usage of different widgets and features.
-### Русский
-Вот некоторые полные примеры, демонстрирующие использование различных виджетов и функций.
+### Window
+```lua
+function createWindow()
+    imgui.Begin("My Window")
+    createButton()
+    createLabel()
+    imgui.End()
+end
+```
 
----
+### Complete Working Example
+```lua
+function main()
+    while true do
+        imgui.BeginFrame()
+        createWindow()
+        imgui.EndFrame()
+    end
+end
+```
 
-## Conclusion
-This concludes the tutorial on using the Kaguneimgui UI library in both English and Russian. For more information, refer to the official documentation.
+## Русский
+
+### Кнопка
+```lua
+function createButton()
+    if imgui.Button("Нажми на меня!") then
+        print("Кнопка нажата!")
+    end
+end
+```
+
+### Ярлык
+```lua
+function createLabel()
+    imgui.Text("Привет, это ярлык!")
+end
+```
+
+### Ввод
+```lua
+local inputText = ""
+function createInput()
+    imgui.InputText("Ввод текста", inputText, 256)
+end
+```
+
+### Чекбокс
+```lua
+local checkboxState = false
+function createCheckbox()
+    imgui.Checkbox("Проверь меня", checkboxState)
+end
+```
+
+### Ползунок
+```lua
+local sliderValue = 50
+function createSlider()
+    imgui.SliderInt("Ползунок", sliderValue, 0, 100)
+end
+```
+
+### Ползунок с плавающей точкой
+```lua
+local floatValue = 0.5
+function createFloatSlider()
+    imgui.SliderFloat("Ползунок с плавающей точкой", floatValue, 0.0, 1.0)
+end
+```
+
+### Радиокнопка
+```lua
+local selected = 1
+function createRadioButtons()
+    imgui.RadioButton("Опция 1", selected == 1)
+    imgui.RadioButton("Опция 2", selected == 2)
+end
+```
+
+### Окно
+```lua
+function createWindow()
+    imgui.Begin("Мое окно")
+    createButton()
+    createLabel()
+    imgui.End()
+end
+```
+
+### Завершенный рабочий пример
+```lua
+function main()
+    while true do
+        imgui.BeginFrame()
+        createWindow()
+        imgui.EndFrame()
+    end
+end
+```
